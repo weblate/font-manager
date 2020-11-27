@@ -135,11 +135,15 @@ namespace FontManager.GoogleFonts {
             settings.set_user_agent_with_application_details(Config.PACKAGE_NAME, Config.PACKAGE_VERSION);
             preview.settings = settings;
             preview.resource_load_started.connect((view, resource, request) => {
+                if (resource.get_uri() != "about:blank")
+                    message("Resource load started : %s", resource.get_uri());
                 resource.failed.connect((resource, error) => {
                     warning("%i : %s", error.code, error.message);
                 });
                 resource.finished.connect((resource) => {
                     var status = (Soup.Status) resource.response.status_code;
+                    if (resource.get_uri() != "about:blank")
+                        message("Resource load finished : %i : %s", (int) status, resource.get_uri());
                     if (status == Soup.Status.OK)
                         return;
                     var uri = resource.get_uri();
@@ -159,10 +163,13 @@ namespace FontManager.GoogleFonts {
             });
             entry.set_placeholder_text(preview_text);
             notify["family"].connect((obj, pspec) => {
+                if (family != null)
+                    message("Family selected : %s", family.family);
                 FileStatus status = family != null ? family.get_installation_status() : font.get_installation_status();
                 selection_changed(status);
             });
             notify["font"].connect((obj, pspec) => {
+                message("Font selected : %s", font.family);
                 update_preview();
                 FileStatus status = font.get_installation_status();
                 selection_changed(status);
@@ -290,6 +297,22 @@ namespace FontManager.GoogleFonts {
                         assert_not_reached();
                 }
             }
+            var bldr = new StringBuilder("Loading HTML :\n\n");
+            for (int i = 0; i < 36; i++)
+                bldr.append("*");
+            bldr.append(" BEGIN ");
+            for (int i = 0; i < 36; i++)
+                bldr.append("*");
+            bldr.append("\n\n");
+            bldr.append(html);
+            bldr.append("\n\n");
+            for (int i = 0; i < 36; i++)
+                bldr.append("*");
+            bldr.append("  END  ");
+            for (int i = 0; i < 36; i++)
+                bldr.append("*");
+            bldr.append("\n\n");
+            message(bldr.str);
             preview.load_html(html, null);
             return;
         }
