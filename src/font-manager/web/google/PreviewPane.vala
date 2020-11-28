@@ -18,6 +18,8 @@
  * If not, see <http://www.gnu.org/licenses/gpl-3.0.txt>.
 */
 
+#if HAVE_WEBKIT
+
 internal const string HEADER = """
 <html dir="%s">
   <head>
@@ -56,7 +58,7 @@ internal const string WATERFALL_ROW = """
 """;
 
 internal const string BODY_TEXT = """
-      <p class="bodyText" style="font-size:%0.2fpx;">
+      <p class="bodyText" style="font-size:%0.1fpx;">
         <span class="previewText">%s</span>
       </p>
 """;
@@ -138,7 +140,9 @@ namespace FontManager.GoogleFonts {
                 if (resource.get_uri() != "about:blank")
                     message("Resource load started : %s", resource.get_uri());
                 resource.failed.connect((resource, error) => {
-                    warning("%i : %s", error.code, error.message);
+                    /* 302 : Load request cancelled */
+                    if (error.code != 302)
+                        warning("%i : %s", error.code, error.message);
                 });
                 resource.finished.connect((resource) => {
                     var status = (Soup.Status) resource.response.status_code;
@@ -223,7 +227,11 @@ namespace FontManager.GoogleFonts {
                                          bg_color_button.get_rgba().to_string(),
                                          font.family, font.style, font.weight,
                                          font.to_font_face_rule()));
+            var pref_loc = Intl.setlocale(LocaleCategory.ALL, "");
+            Intl.setlocale(LocaleCategory.ALL, "C");
+            //var size = "%.1f".printf(preview_size);
             builder.append(BODY_TEXT.printf(preview_size, LOREM_IPSUM));
+            Intl.setlocale(LocaleCategory.ALL, pref_loc);
             builder.append(FOOTER);
             return builder.str;
         }
@@ -395,3 +403,5 @@ namespace FontManager.GoogleFonts {
     }
 
 }
+
+#endif /* HAVE_WEBKIT */
