@@ -1,9 +1,10 @@
 # Jerry Casiano <JerryCasiano@gmail.com>, 2019. #zanata
+# Adolfo Jayme Barrientos <fitojb@ubuntu.com>, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "POT-Creation-Date: 2021-01-31 14:53-0500\n"
-"PO-Revision-Date: 2021-03-01 21:50+0000\n"
+"PO-Revision-Date: 2021-03-05 12:50+0000\n"
 "Last-Translator: Adolfo Jayme Barrientos <fitojb@ubuntu.com>\n"
 "Language-Team: Catalan <https://hosted.weblate.org/projects/font-manager/"
 "font-manager-help-docs/ca/>\n"
@@ -12,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.5\n"
+"X-Generator: Weblate 4.5.1-dev\n"
 
 #. Put one translator per line, in the form NAME <EMAIL>, YEAR1, YEAR2
 msgctxt "_"
@@ -1048,7 +1049,7 @@ msgstr ""
 #. (itstool) path: page/title
 #: C/font-manager-supported-formats.page:10
 msgid "Supported File Formats"
-msgstr ""
+msgstr "Formats de fitxer compatibles"
 
 #. (itstool) path: item/title
 #: C/font-manager-supported-formats.page:14
@@ -1081,13 +1082,13 @@ msgstr ""
 #: C/index.page:10
 msgctxt "link"
 msgid "Font Manager"
-msgstr ""
+msgstr "Gestor tipogràfic"
 
 #. (itstool) path: info/title
 #: C/index.page:11
 msgctxt "text"
 msgid "Font Manager"
-msgstr "Gestor de tipus de lletra"
+msgstr "Gestor tipogràfic"
 
 #. (itstool) path: credit/name
 #: C/index.page:14
