@@ -175,6 +175,7 @@ appstream-util validate-relax --nonet %{buildroot}/%{_datadir}/metainfo/*.metain
 %{_datadir}/glib-2.0/schemas/%{DBusName}.gschema.xml
 
 %files -n font-viewer
+%dir %{_libexecdir}/%{name}
 %{_libexecdir}/%{name}/font-viewer
 %{_datadir}/metainfo/%{DBusName2}.metainfo.xml
 %{_datadir}/applications/%{DBusName2}.desktop
